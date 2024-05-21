@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PractisModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="People">
+    <Key>
+      <PropertyRef Name="ID_People" />
+    </Key>
+    <Property Name="ID_People" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SurnamePeople" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NamePeople" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MiddleNamePeople" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="WorkReport" Relationship="Self.FK__WorkRepor__Peopl__4D94879B" FromRole="People" ToRole="WorkReport" />
+  </EntityType>
+  <EntityType Name="WorkInfo">
+    <Key>
+      <PropertyRef Name="ID_WorkInfo" />
+    </Key>
+    <Property Name="ID_WorkInfo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WorkPost" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DateStartOfWork" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Salary" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="WorkReport" Relationship="Self.FK__WorkRepor__WorkI__4E88ABD4" FromRole="WorkInfo" ToRole="WorkReport" />
+  </EntityType>
+  <EntityType Name="WorkReport">
+    <Key>
+      <PropertyRef Name="ID_WorkReport" />
+    </Key>
+    <Property Name="ID_WorkReport" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="People_ID" Type="Int32" />
+    <Property Name="WorkInfo_ID" Type="Int32" />
+    <NavigationProperty Name="People" Relationship="Self.FK__WorkRepor__Peopl__4D94879B" FromRole="WorkReport" ToRole="People" />
+    <NavigationProperty Name="WorkInfo" Relationship="Self.FK__WorkRepor__WorkI__4E88ABD4" FromRole="WorkReport" ToRole="WorkInfo" />
+  </EntityType>
+  <Association Name="FK__WorkRepor__Peopl__4D94879B">
+    <End Role="People" Type="Self.People" Multiplicity="0..1" />
+    <End Role="WorkReport" Type="Self.WorkReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="People">
+        <PropertyRef Name="ID_People" />
+      </Principal>
+      <Dependent Role="WorkReport">
+        <PropertyRef Name="People_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WorkRepor__WorkI__4E88ABD4">
+    <End Role="WorkInfo" Type="Self.WorkInfo" Multiplicity="0..1" />
+    <End Role="WorkReport" Type="Self.WorkReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkInfo">
+        <PropertyRef Name="ID_WorkInfo" />
+      </Principal>
+      <Dependent Role="WorkReport">
+        <PropertyRef Name="WorkInfo_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PractisEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="People" EntityType="Self.People" />
+    <EntitySet Name="WorkInfo" EntityType="Self.WorkInfo" />
+    <EntitySet Name="WorkReport" EntityType="Self.WorkReport" />
+    <AssociationSet Name="FK__WorkRepor__Peopl__4D94879B" Association="Self.FK__WorkRepor__Peopl__4D94879B">
+      <End Role="People" EntitySet="People" />
+      <End Role="WorkReport" EntitySet="WorkReport" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WorkRepor__WorkI__4E88ABD4" Association="Self.FK__WorkRepor__WorkI__4E88ABD4">
+      <End Role="WorkInfo" EntitySet="WorkInfo" />
+      <End Role="WorkReport" EntitySet="WorkReport" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

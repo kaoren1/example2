@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище PractisModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="People">
+    <Key>
+      <PropertyRef Name="ID_People" />
+    </Key>
+    <Property Name="ID_People" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SurnamePeople" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="NamePeople" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="MiddleNamePeople" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="WorkInfo">
+    <Key>
+      <PropertyRef Name="ID_WorkInfo" />
+    </Key>
+    <Property Name="ID_WorkInfo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WorkPost" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="DateStartOfWork" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Salary" Type="varchar" MaxLength="6" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WorkReport">
+    <Key>
+      <PropertyRef Name="ID_WorkReport" />
+    </Key>
+    <Property Name="ID_WorkReport" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="People_ID" Type="int" />
+    <Property Name="WorkInfo_ID" Type="int" />
+  </EntityType>
+  <Association Name="FK__WorkRepor__Peopl__4D94879B">
+    <End Role="People" Type="Self.People" Multiplicity="0..1" />
+    <End Role="WorkReport" Type="Self.WorkReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="People">
+        <PropertyRef Name="ID_People" />
+      </Principal>
+      <Dependent Role="WorkReport">
+        <PropertyRef Name="People_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WorkRepor__WorkI__4E88ABD4">
+    <End Role="WorkInfo" Type="Self.WorkInfo" Multiplicity="0..1" />
+    <End Role="WorkReport" Type="Self.WorkReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkInfo">
+        <PropertyRef Name="ID_WorkInfo" />
+      </Principal>
+      <Dependent Role="WorkReport">
+        <PropertyRef Name="WorkInfo_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище PractisModelContainer">
+    <EntitySet Name="People" EntityType="Self.People" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WorkInfo" EntityType="Self.WorkInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WorkReport" EntityType="Self.WorkReport" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__WorkRepor__Peopl__4D94879B" Association="Self.FK__WorkRepor__Peopl__4D94879B">
+      <End Role="People" EntitySet="People" />
+      <End Role="WorkReport" EntitySet="WorkReport" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WorkRepor__WorkI__4E88ABD4" Association="Self.FK__WorkRepor__WorkI__4E88ABD4">
+      <End Role="WorkInfo" EntitySet="WorkInfo" />
+      <End Role="WorkReport" EntitySet="WorkReport" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище PractisModelContainer" CdmEntityContainer="PractisEntities">
+    <EntitySetMapping Name="People">
+      <EntityTypeMapping TypeName="PractisModel.People">
+        <MappingFragment StoreEntitySet="People">
+          <ScalarProperty Name="ID_People" ColumnName="ID_People" />
+          <ScalarProperty Name="SurnamePeople" ColumnName="SurnamePeople" />
+          <ScalarProperty Name="NamePeople" ColumnName="NamePeople" />
+          <ScalarProperty Name="MiddleNamePeople" ColumnName="MiddleNamePeople" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkInfo">
+      <EntityTypeMapping TypeName="PractisModel.WorkInfo">
+        <MappingFragment StoreEntitySet="WorkInfo">
+          <ScalarProperty Name="ID_WorkInfo" ColumnName="ID_WorkInfo" />
+          <ScalarProperty Name="WorkPost" ColumnName="WorkPost" />
+          <ScalarProperty Name="DateStartOfWork" ColumnName="DateStartOfWork" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkReport">
+      <EntityTypeMapping TypeName="PractisModel.WorkReport">
+        <MappingFragment StoreEntitySet="WorkReport">
+          <ScalarProperty Name="ID_WorkReport" ColumnName="ID_WorkReport" />
+          <ScalarProperty Name="People_ID" ColumnName="People_ID" />
+          <ScalarProperty Name="WorkInfo_ID" ColumnName="WorkInfo_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
